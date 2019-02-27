@@ -1,7 +1,56 @@
 #include "Star.h"
 	#include <iostream>
 	
-		
+	//STARVECTOR
+	Starvector::Starvector() {
+		planets = Vector();
+	}
+
+	Starvector::~Starvector() {
+		planets.Vector::~Vector();
+	}
+	long Starvector::addPlanet() {
+		planets.Vector::insert(Starvector::getCurrentNumPlanets(), new Planet(0));
+		return planets.Vector::read(Starvector::getCurrentNumPlanets()-1)->Planet::getID();
+	}
+
+	bool Starvector::removePlanet(int planetID) {
+		for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
+			if(planets.Vector::read(i)->Planet::getID() == planetID) {
+				planets.Vector::remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	Planet * Starvector::getPlanet(int planetID) {
+		for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
+			if(planets.Vector::read(i)->Planet::getID() == planetID) {
+				return planets.Vector::read(i);
+			}
+		}
+		return NULL;
+	}
+
+	void Starvector::orbit() {
+		for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
+			planets.Vector::read(i)->Planet::orbit();
+		}
+	}
+
+	void Starvector::printStarInfo() {
+		cout << "This star currently has " << Starvector::getCurrentNumPlanets() << " planets." << endl;
+		for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
+			cout << "Planet " << planets.Vector::read(i)->Planet::getType() << i << " is " << planets.Vector::read(i)->Planet::getDistance() << " miles away at position " << planets.Vector::read(i)->Planet::getPos() << " around the star." << endl;
+		}
+	}
+
+	unsigned int Starvector::getCurrentNumPlanets() {
+		return planets.Vector::size();
+	}
+
+	//STARLIST
 	Starlist::Starlist(){
 		this->star_list = new List();
 	}
