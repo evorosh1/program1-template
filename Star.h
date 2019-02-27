@@ -32,5 +32,18 @@ Star.h
 		void printStarInfo();
 		unsigned int getCurrentNumPlanets();
 	};
+
+	class Starvector{
+	public:
+		Vector planets;
+		Starvector();
+		~Starvector();
+		long addPlanet();
+		bool removePlanet(int planetID);
+		Planet * getPlanet(int planetID);
+		void orbit();
+		void printStarInfo();
+		unsigned int getCurrentNumPlanets();
+};
 	
 	#endif
