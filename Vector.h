@@ -1,4 +1,3 @@
-
 #ifndef VECTOR_H
 #define VECTOR_H
 
@@ -7,9 +6,9 @@
 class Vector{
 	private:
 		int length;
-		Planet ** planets;
 	public:
-         Vector();
+        Planet ** planets = new Planet *[0];
+        Vector();
         ~Vector();
         void insert(int index, Planet *p);
         Planet *read(int index);

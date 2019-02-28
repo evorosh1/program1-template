@@ -19,10 +19,12 @@ List::List(){
 List::~List(){
 	Node * tem = head;
 	for(int i = 0; i < size()-1; i++){
-		tem = tem->next;
-		delete(tem->prev);
+		if(tem != tail) {
+			tem = tem->next;
+			delete tem->prev;
+		} else break;
 	}
-	delete(tem);
+	if(tem != NULL) delete tem;
 }
 
 void List::insert(int index, Planet * x){
