@@ -11,8 +11,10 @@ Vector::Vector() {
 Vector::~Vector() {
 	for(int i = 0; i < length; i++) {
 		delete planets[i];
+		planets[i] = NULL;
 	}
 	delete[] planets;
+	planets = NULL;
 }
 
 void Vector::insert(int index, Planet *p) {
@@ -24,6 +26,7 @@ void Vector::insert(int index, Planet *p) {
 		}
 		planets[index] = p;
 		this->length = index+1;
+		delete[] temp;
 		return;
 	}
 
@@ -33,6 +36,7 @@ void Vector::insert(int index, Planet *p) {
 		else if(i > index) planets[i] = temp[i-1];
 		else planets[i] = p;
 	}
+	delete[] temp;
 	this->length++;
 	return;
 }
@@ -51,8 +55,9 @@ bool Vector::remove(int index) {
 		if(i < index) planets[i] = temp[i];
 		else if(i > index) planets[i-1] = temp[i];
 	}
+	//delete temp[index];
+	delete[] temp;
 	this->length--;
-	delete temp;
 	return true;
 }
 
