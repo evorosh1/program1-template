@@ -1,11 +1,8 @@
 #include "List.h"
-#include "Planet.h"
 #include <cstdlib>
 #include <iostream>
 
-using namespace std;
-
-Node::Node(Planet *x){
+Node::Node(Planet * x){
 	this->x = x;
 	this->prev = NULL;
 	this->next = NULL;
@@ -14,25 +11,31 @@ Node::Node(Planet *x){
 List::List(){
 	this->head = NULL;
 	this->tail = NULL;
+	this->len =0;
 }
 
 List::~List(){
 	Node * tem = head;
-	for(int i = 0; i < size(); i++){
-		tem = tem->next;
-		delete(tem->prev);
+	if(tem ==NULL) return;
+	for(int i = 0; i < size; i++){
+		if(tem->next != NULL){
+			tem = tem->next;
+			delete(tem->prev->x);
+			delete(tem->prev);
+		}
 	}
+	delete(tem->p);
 	delete(tem);
 }
 
-void List::insert(int index, Planet * x){
-	int i = 0;
+void List::insert(unsigned int idx, Planet * x){
+	unsigned int j = 0;
 	Node * tem = head;
 	Node * newNode = new Node(x);
 	Node * current;
-	cout << "1" << endl;
-	if (index > size()){
-		while (tem->next != NULL){
+	len++;
+	if (idx +1 >= len){
+		while(tem-> next != NULL){
 			tem = tem->next;
 		}
 		tem->next = newNode;
@@ -40,73 +43,71 @@ void List::insert(int index, Planet * x){
 		tail = newNode;
 		return;
 	}
-	cout << "2" << endl;
-	if (index == 0){
-		cout << "a" << endl;
+	if (idx == 0){
 		newNode->next = tem;
-		cout << "b" << endl;
 		tem->prev = newNode;
-		cout << "c" << endl;
 		head = newNode;
-		cout << "d" << endl;
 	}
-	cout << "3" << endl;
-	while (i != index){
-		tem = tem->next;
-		i++;
-	}
-	cout << "4" << endl;
-	if(i == index){
-		current = tem->prev;
+	if(j == idx){
+		current= tem->prev;
 		current->next = newNode;
 		newNode->prev = current;
 		newNode->next = tem;
 		tem->prev = newNode;
 	}
-	cout << "5" << endl;
-	this->length++;
+	if(len ==1){
+		head = newNode;
+		tail = newNode;
+		return;
+	}
+	while (j != idx){
+		tem = tem->next;
+		j=j+1;
+	}
+
 	return;
 }
 
-Planet* List::read(int index){
-	int i = 0;
+Planet* List::read(unsigned int idx){
+	unsigned int j = 0;
 	Node * place = head;
-	if (index >= size()) return NULL;
-	while (i != index){
+	if (idx >= len) return NULL;
+	while (j != idx){
 		place = place->next;
-		i++;
+		j++;
 	}
 	return place->x;
 }
 
-bool List::remove(int index){
-	this->length--;
-	Node * temp = head;
-	int i = 0;
-	if (index == 0){
-		head = temp->next;
-		delete(temp);
+bool List::remove(int idx){
+	len--;
+	Node * curr = head;
+	int j = 0;
+	if (idx == 0){
+		head = curr->next;
+		delete(curr);
 		return true;
 	}
-	if (index == size()){
-		temp = tail;
+	if (idx == len){
+		curr = tail;
 		tail = tail->prev;
-		delete (temp);
+		delete (curr);
 		return true;
 	}
-	while (i != index){
-		temp = temp->next;
-		i++;
+	while (j != idx){
+		curr = curr->next;
+		j=j+1;
 	}
-	if(i == index) {
-		temp->prev = temp->next;
-		temp->next = temp->prev;
-		delete(temp);
+	if(i == idx) {
+		curr->prev = curr->next;
+		curr->next = curr->prev;
+		delete(curr);
 		return true;
 	}
 	return false;
 }
 
 unsigned List::size(){
-	return this->length;
+	return len;
 }
+
