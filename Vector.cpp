@@ -1,56 +1,85 @@
-
 #include "Planet.h"
 #include "Vector.h"
 #include <iostream>
 	
 Vector::Vector() {
-	this->planets = new Planet *[0];
+	this->length = 0
+	this->planets = NULL;
 }
 
 Vector::~Vector() {
-	for(int i = 0; i < length; i++) {
-		delete planets[i];
+	for(int i = 0; i < this->length; i++) {
+		delete(this->planets[i]);
 	}
-	delete[] planets;
+	delete[] (this->planets);
 }
 
 void Vector::insert(int index, Planet *p) {
-	Planet** temp = planets;
-	if(index >= size()) {
-		planets = new Planet *[index+1];
-		for(int i = 0; i < size(); i++) {
-			planets[i] = temp[i];
+	Planet** plants;
+	int x = 0;
+	if(index > this->lenght) {
+		plants = new Planet *[index+1];
+		for(int i = 0; i <= index; i++) {
+			if (i < this->length)plants[i] = (this->planets)[i];			
+			else if (i==index) planets[i] = p;
+			else plants[i] = NULL;
 		}
-		planets[index] = p;
-		this->length = index+1;
+		
+		this->length = this->length+1;
+		if(index>this->length) this->length = index
+		this->length = this->length+1;
+		delete[] (this->planets);
+		this->planets = plants
 		return;
 	}
 
-	planets = new Planet *[size()+1];
-	for(int i = 0; i < size()+1; i++) {
-		if(i < index) planets[i] = temp[i];
-		else if(i > index) planets[i] = temp[i-1];
-		else planets[i] = p;
+	plants = new Planet *[this->length+1];
+	for(int i = 0; i < this->lenght+1; i++) {
+		if(i != index) {
+
+			plants[i] = (this->planets)[x];
+			x++;
+		}
+		else {
+		 plants[i] = p;
+		}
 	}
 	this->length++;
+	delete[](this->planets);
+	this->planets=plants
 	return;
 }
 
 Planet * Vector::read(int index) {
-	if(index >= size()) return NULL;
-	return planets[index];
+	if(index >= this->length) return NULL;
+	for(int x = 0; x<this->length;x++){
+		if(x == index)
+			return(this->planets)[x]:
+		}
+	return NULL;
 }
 
 bool Vector::remove(int index) {
-	Planet** temp = planets;
-	if(index >= size()) return false;
+	bool remv =false;
+	int x =0;
+	if(index >= this->length) return false;
+	if(this->planets == NULL)return false;
+	Planet** temp;
 
-	planets = new Planet *[size()-1];
-	for(int i = 0; i < size(); i++) {
-		if(i < index) planets[i] = temp[i];
-		else if(i > index) planets[i-1] = temp[i];
+	temp = new Planet *[(this->length)-1];
+	for(int i = 0; i < this->length; i++) {
+		if(i != index) {
+		temp[x] = (this->planets)[i];
+		x++
+		}
+		else {
+		delete(this->planets[i]);
+		remv=true;
+		}
 	}
 	this->length--;
+	delete(this->planets);
+	this->planets = temp;
 	return true;
 }
 
