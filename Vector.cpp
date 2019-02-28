@@ -4,7 +4,7 @@
 #include <iostream>
 	
 Vector::Vector() {
-	planets = new Planet *[0];
+	this->planets = new Planet *[0];
 }
 
 Vector::~Vector() {

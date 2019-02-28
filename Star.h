@@ -7,7 +7,7 @@
 
 class Starvector{
 	public:
-        Vector planets;
+        Vector *planets;
         Starvector();
         ~Starvector();
         long addPlanet();

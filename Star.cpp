@@ -6,21 +6,21 @@
 using namespace std;
 
 Starvector::Starvector() {
-	planets = Vector();
+	this->planets = new Vector();
 }
 
 Starvector::~Starvector() {
-	planets.Vector::~Vector();
+	planets->Vector::~Vector();
 }
 long Starvector::addPlanet() {
-	planets.Vector::insert(Starvector::getCurrentNumPlanets(), new Planet(0));
-	return planets.Vector::read(Starvector::getCurrentNumPlanets()-1)->Planet::getID();
+	planets->Vector::insert(Starvector::getCurrentNumPlanets(), new Planet(0));
+	return planets->Vector::read(Starvector::getCurrentNumPlanets()-1)->Planet::getID();
 }
 
 bool Starvector::removePlanet(int planetID) {
 	for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
-		if(planets.Vector::read(i)->Planet::getID() == planetID) {
-			planets.Vector::remove(i);
+		if(planets->Vector::read(i)->Planet::getID() == planetID) {
+			planets->Vector::remove(i);
 			return true;
 		}
 	}
@@ -29,8 +29,8 @@ bool Starvector::removePlanet(int planetID) {
 
 Planet * Starvector::getPlanet(int planetID) {
 	for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
-		if(planets.Vector::read(i)->Planet::getID() == planetID) {
-			return planets.Vector::read(i);
+		if(planets->Vector::read(i)->Planet::getID() == planetID) {
+			return planets->Vector::read(i);
 		}
 	}
 	return NULL;
@@ -38,19 +38,19 @@ Planet * Starvector::getPlanet(int planetID) {
 
 void Starvector::orbit() {
 	for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
-		planets.Vector::read(i)->Planet::orbit();
+		planets->Vector::read(i)->Planet::orbit();
 	}
 }
 
 void Starvector::printStarInfo() {
 	cout << "This star currently has " << Starvector::getCurrentNumPlanets() << " planets." << endl;
 	for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
-		cout << "Planet " << planets.Vector::read(i)->Planet::getType() << i << " is " << planets.Vector::read(i)->Planet::getDistance() << " miles away at position " << planets.Vector::read(i)->Planet::getPos() << " around the star." << endl;
+		cout << "Planet " << planets->Vector::read(i)->Planet::getType() << i << " is " << planets->Vector::read(i)->Planet::getDistance() << " miles away at position " << planets->Vector::read(i)->Planet::getPos() << " around the star." << endl;
 	}
 }
 
 unsigned int Starvector::getCurrentNumPlanets() {
-	return planets.Vector::size();
+	return planets->Vector::size();
 }
 
 Starlist::Starlist(){
@@ -115,5 +115,5 @@ Starlist::Starlist(){
 	}
 	
 	unsigned int Starlist::getCurrentNumPlanets(){
-		return Starlist::getCurrentNumPlanets();
+		return list->size();
 	}
