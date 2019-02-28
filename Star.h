@@ -1,49 +1,36 @@
-Star.h 
-#ifndef Star_Planet
-	#define Star_Planet
-	#include "Planet.h"
-	#include "List.h"
-	#include "Vector.h"
-	
-	class Starvector{
-	private:
-		unsigned int current_p;
-	public:
-		Vector *vect;
-		Starvector();
-		~Starvector();
-	  long addPlanet();
-		bool removePlanet(long);
-		Planet * getPlanet(long);
-		void orbit();
-		void printStarInfo();
-		unsigned int getCurrentNumPlanets(){return this->current_p;}
-	};
-	
-	class Starlist{
-	public:
-		List *list;
-		Starlist();
-		~Starlist();
-		long addPlanet();
-		bool removePlanet(long);
-		Planet * getPlanet(long);
-		void orbit();
-		void printStarInfo();
-		unsigned int getCurrentNumPlanets();
-	};
+#ifndef STAR_H
+#define STAR_H
 
-	class Starvector{
+#include "Planet.h"
+#include "Vector.h"
+#include "List.h"
+
+class Starvector{
 	public:
-		Vector planets;
-		Starvector();
-		~Starvector();
-		long addPlanet();
-		bool removePlanet(int planetID);
-		Planet * getPlanet(int planetID);
-		void orbit();
-		void printStarInfo();
-		unsigned int getCurrentNumPlanets();
+        Vector planets;
+        Starvector();
+        ~Starvector();
+        long addPlanet();
+        bool removePlanet(int planetID);
+        Planet * getPlanet(int planetID);
+        void orbit();
+        void printStarInfo();
+        unsigned int getCurrentNumPlanets();
+        //you may add any additional methodas you may need.
 };
-	
-	#endif
+
+class Starlist{
+public:
+        List *list;
+        Starlist();
+        ~Starlist();
+        List star_list;
+        long addPlanet();
+        bool removePlanet(long);
+        Planet * getPlanet(long);
+        void orbit();
+        void printStarInfo();
+        unsigned int getCurrentNumPlanets();
+};
+
+#endif

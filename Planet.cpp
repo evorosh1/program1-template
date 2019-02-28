@@ -1,19 +1,20 @@
 #include "Planet.h"
 #include <iostream>
-	Planet::Planet(int dis){
-		this->id = (long)this;
-		this->distance = dis;
-		this->position = std::rand()%360;
-		int num = std::rand()%3;
-		if (num == 0) this->type = 'h';
-		if (num == 1) this->type = 'r';
-		if (num == 2) this->type = 'g';
-	}
-	
-	int Planet::orbit(){
-		this->position = this->position+ 1;
-		if (this->position > 359){
-			this->position = 0;
-		}
-		return this->position;
-	}
+
+using namespace std;
+
+Planet::Planet(int distance){
+	this->distance = distance;
+    this->pos = rand() % 360;
+    int random = rand() % 3;
+    if(random == 0) this->type = 'g';
+    else if(random == 1) this->type = 'h';
+    else this->type = 'r';
+}
+
+int Planet::orbit() {
+	if(this->pos == 359) {
+		this->pos = 0;
+	} else this->pos++;
+	return this->pos;
+}

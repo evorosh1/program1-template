@@ -1,20 +1,28 @@
-CFLAGS = -Wall -Wextra -DDEBUG -g -std=c++14
+P = program1
 
+all: program1.o planet.o vector.o star.o list.o
+	g++ program1.o planet.o vector.o star.o list.o -o program1
 
-all: 
-	g++ $(CFLAGS) -c program1.cpp -o program1.o
-	g++ $(CFLAGS) -c Star.cpp -o Star.o
-	g++ $(CFLAGS) -c Planet.cpp -o Planet.o
-	g++ $(CFLAGS) -c List.cpp -o List.o
-	g++ $(CFLAGS) -c Vector.cpp -o Vector.o
-	g++ program1.o Star.o Planet.o List.o Vector.o -o program1
+program1.o: program1.cpp
+	g++ -c program1.cpp -o program1.o
+
+vector.o: vector.cpp
+	g++ -c vector.cpp -o vector.o
+
+planet.o: planet.cpp
+	g++ -c planet.cpp -o planet.o
+
+star2.o: star.cpp
+	g++ -c star.cpp -o star.o
+
+list.o: list.cpp
+	g++ -c list.cpp -o list.o
 
 run: all
-	./program1
+	./$(P)
 
-clean: all
-	rm -rf program1 *.o
+clean:
+	rm -rf *.o $(P)
+
 memcheck: all
-	valgrind ./program1
-
-
+	valgrind -v ./(P)
