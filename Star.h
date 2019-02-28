@@ -11,8 +11,8 @@ class Starvector{
         Starvector();
         ~Starvector();
         long addPlanet();
-        bool removePlanet(int planetID);
-        Planet * getPlanet(int planetID);
+        bool removePlanet(long planetID);
+        Planet * getPlanet(long planetID);
         void orbit();
         void printStarInfo();
         unsigned int getCurrentNumPlanets();

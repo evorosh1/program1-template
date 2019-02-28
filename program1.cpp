@@ -168,28 +168,28 @@ int main(){
     assert(sv->getCurrentNumPlanets() == 0);
     id_list[1] = sv->addPlanet();
     assert(sv->getCurrentNumPlanets() == 1);
-    // p = sv->getPlanet(id_list[1]);
-    // pos = p->getPos();
-    // sv->orbit();
-    // assert(p->getPos() == (pos + 1) % 360);
+    p = sv->getPlanet(id_list[1]);
+    pos = p->getPos();
+    sv->orbit();
+    assert(p->getPos() == (pos + 1) % 360);
 
     //add 200 more planets to each
     for(int i = 0; i < 200; i+=2){
         id_list[i] = sv->addPlanet();
         id_list[i+1] = sl->addPlanet();
     }
-    // //delete 10 random planets in the sun
-    // for(int i = 0; i < 50; i++){
-    //     int rand_id = (rand() % (200));
-    //     if(id_list[rand_id] == -1){
-    //         continue;
-    //     }else if(sv->removePlanet(id_list[rand_id]) ||
-    //         sl->removePlanet(id_list[rand_id])){
-    //         id_list[rand_id] = -1;
-    //     }else{
-    //         assert(false);
-    //     }
-    // }
+    //delete 10 random planets in the sun
+    for(int i = 0; i < 50; i++){
+        int rand_id = (rand() % (200));
+        if(id_list[rand_id] == -1){
+            continue;
+        }else if(sv->removePlanet(id_list[rand_id]) ||
+            sl->removePlanet(id_list[rand_id])){
+            id_list[rand_id] = -1;
+        }else{
+            assert(false);
+        }
+    }
 
     sv->printStarInfo();
     sl->printStarInfo();

@@ -13,11 +13,11 @@ Starvector::~Starvector() {
 	planets->Vector::~Vector();
 }
 long Starvector::addPlanet() {
-	planets->Vector::insert(Starvector::getCurrentNumPlanets(), new Planet(0));
+	planets->Vector::insert(Starvector::getCurrentNumPlanets(), new Planet(rand()%3001));
 	return planets->Vector::read(Starvector::getCurrentNumPlanets()-1)->Planet::getID();
 }
 
-bool Starvector::removePlanet(int planetID) {
+bool Starvector::removePlanet(long planetID) {
 	for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
 		if(planets->Vector::read(i)->Planet::getID() == planetID) {
 			planets->Vector::remove(i);
@@ -27,7 +27,7 @@ bool Starvector::removePlanet(int planetID) {
 	return false;
 }
 
-Planet * Starvector::getPlanet(int planetID) {
+Planet * Starvector::getPlanet(long planetID) {
 	for(int i = 0; i < Starvector::getCurrentNumPlanets(); i++) {
 		if(planets->Vector::read(i)->Planet::getID() == planetID) {
 			return planets->Vector::read(i);
@@ -63,7 +63,7 @@ Starlist::Starlist(){
 	
 	long Starlist::addPlanet(){
 		unsigned int idx_plan = 0;
-		Planet * x = new Planet(std::rand()%3001);
+		Planet * x = new Planet(rand()%3001);
 		list->insert(idx_plan, x);
 		Planet * j = list->read(idx_plan);
 		return j->getID();
@@ -73,14 +73,12 @@ Starlist::Starlist(){
 		Planet * newp;
 		for(unsigned int x = 0; x < Starlist::getCurrentNumPlanets(); x++){
 			newp = list->read(x);
-			if (newp->getID() != id){
-				return false;
-			}
-			else{
+			if (newp->getID() != id) {
 				list->remove(x);
 				return true;
 			}
 		}
+		return false;
 	}
 	
 	Planet * Starlist::getPlanet(long id){
