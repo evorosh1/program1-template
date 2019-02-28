@@ -120,7 +120,7 @@ int main(){
 
     cerr << "\n\t=========Test #11: Linked List Insertion===========\n\n";
     int index = 0;
-    //add elements to the list
+    ////add elements to the list
     for(int index = 0 ; index < 10 ; index++ ){
         list->insert(index, new Planet(0));
     }
@@ -239,8 +239,8 @@ int main(){
     profile_time = ((stop.tv_sec* 1000000) + stop.tv_usec) - ((start.tv_sec* 1000000) + start.tv_usec);
     printf("\tCompleted Starvector remove profile time = %lf\n", profile_time);
 
-    /************************ Starlist Performance Test *********************/
-    /** Testing performance of insert **/
+    ///************************ Starlist Performance Test *********************/
+    ///** Testing performance of insert **/
     gettimeofday(&start, NULL);
     for(int i = 0; i < 200; i++){
         id_list[i] = sl->addPlanet();

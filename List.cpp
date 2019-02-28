@@ -14,6 +14,7 @@ Node::Node(Planet *x){
 List::List(){
 	this->head = NULL;
 	this->tail = NULL;
+	this->length = 0;
 }
 
 List::~List(){

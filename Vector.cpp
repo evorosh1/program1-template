@@ -5,6 +5,7 @@
 	
 Vector::Vector() {
 	this->planets = new Planet *[0];
+	this->length = 0;
 }
 
 Vector::~Vector() {
