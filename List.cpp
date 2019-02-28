@@ -80,17 +80,24 @@ Planet* List::read(unsigned int idx){
 }
 
 bool List::remove(int idx){
-	len--;
 	Node * curr = head;
-	int j = 0;
+	if(idx >= len){
+		return false;
+	}
+	len= len-1;
+	unsigned int j = 0;
 	if (idx == 0){
 		head = curr->next;
+		head->prev = NULL;
+		delete(curr->x);
 		delete(curr);
 		return true;
 	}
 	if (idx == len){
 		curr = tail;
 		tail = tail->prev;
+		tail->next = NULL;
+		delete (curr->x);
 		delete (curr);
 		return true;
 	}
@@ -99,8 +106,9 @@ bool List::remove(int idx){
 		j=j+1;
 	}
 	if(i == idx) {
-		curr->prev = curr->next;
-		curr->next = curr->prev;
+		curr->prev->next = curr->next;
+		curr->next->prev = curr->prev;
+		delete(curr->x);
 		delete(curr);
 		return true;
 	}
